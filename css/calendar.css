@@ -1,0 +1,17 @@
+.modal{
+	max-height: 300px;
+}
+
+.holder{
+	width: 100%;
+}
+
+b{
+	  font-family: 'Open Sans', sans-serif;
+  color: #53555c;
+  margin-bottom: 10px;
+  font-size: 15.5px;
+    margin: 10px 0;
+  font-weight: bold;
+  line-height: 20px;
+}
