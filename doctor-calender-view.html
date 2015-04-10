@@ -29,14 +29,8 @@
         <script type="text/javascript">
 
         $("document").ready(function(){
-		$('#submitButton').onclick = function() { doSubmit(); };
-        $.ajax({
-	      url: 'getHospitals.php',
-	      type: 'post',
-	      success: function(data, status) {
-	          $('#allHospitals').html(data);
-	      }
-	    }); // end ajax call
+        	getData();
+
     	});
         var hospital;
         var department;
@@ -45,36 +39,19 @@
         //$('#calendar').fullCalendar( 'refresh' );//going to have to call when update choices
         </script>
         <script type="text/javascript">
-	    function makeAppointment(reason, start, end){
-	    	var startTime = new Date(start);
-			var endTime = new Date(end);
-			var day;
-			if (startTime.is().monday()) {
-				day = "mon";
-			}else if(startTime.is().tuesday()) {
-				day = "tues";
-			}else if (startTime.is().wednesday()) {
-				day="wed";
-			}else if (startTime.is().thursday()) {
-				day="thurs";
-			}else if (startTime.is().friday()) {
-				day="fri";
-			}else if (startTime.is().saturday()) {
-				day="sat";
-			}else if (startTime.is().sunday()) {
-				day="sun";
-			}
-			$.ajax({
-		      url: 'makeAppointment.php',
-		      type: 'post',
-		      data: {'reason':reason,
-		      		'start': moment(start).format('YYYY-MM-DD HH:mm:00'),
-		  			'end': moment(end).format('YYYY-MM-DD HH:mm:00'), 
-		  			'id': id},
+        function getData(){
+        	$.ajax({
+		      url: 'appointmentsDoctor.php',
+		      type: 'get',
+		      data: {'id':id },
+		      		      dataType: "json",
 		      success: function(data, status) {
+		      	//var obj = data;
+		      	var d = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
+		      	$('<a href="data:' + d + '" download="data.json" class="download">Download JSON</a>').appendTo('#download');
 		      }
 		    });
-	    }
+        }
 	    function cancelAppointment(id, start, end){
 	    	$.ajax({
 		      url: 'cancelAppointment.php',
@@ -122,7 +99,6 @@
 		  			'dayStart': dayStart,
 		  			'dayEnd': dayEnd},
 		      success: function(data, status) {
-		      	$('#stuff').html(data);
 		      }
 		    });
 	    }
@@ -155,7 +131,43 @@
 		}
 
 		function myEvent(event){
-		    var array = $('#calendar').fullCalendar( 'clientEvents' , "hours" );
+		    var array = $('#calendar').fullCalendar( 'clientEvents' , "hours0" );
+		    for(i in array){
+		        if (event == array[i]){
+		           return true;
+		        }
+		    }
+		    var array = $('#calendar').fullCalendar( 'clientEvents' , "hours1" );
+		    for(i in array){
+		        if (event == array[i]){
+		           return true;
+		        }
+		    }
+		    var array = $('#calendar').fullCalendar( 'clientEvents' , "hours2" );
+		    for(i in array){
+		        if (event == array[i]){
+		           return true;
+		        }
+		    }
+		    var array = $('#calendar').fullCalendar( 'clientEvents' , "hours3" );
+		    for(i in array){
+		        if (event == array[i]){
+		           return true;
+		        }
+		    }
+		    var array = $('#calendar').fullCalendar( 'clientEvents' , "hours4" );
+		    for(i in array){
+		        if (event == array[i]){
+		           return true;
+		        }
+		    }
+		    var array = $('#calendar').fullCalendar( 'clientEvents' , "hours5" );
+		    for(i in array){
+		        if (event == array[i]){
+		           return true;
+		        }
+		    }
+		    var array = $('#calendar').fullCalendar( 'clientEvents' , "hours6" );
 		    for(i in array){
 		        if (event == array[i]){
 		           return true;
@@ -214,7 +226,7 @@
 			      selectable: true,
 			      defaultView: 'agendaWeek',
 			      events: [{
-				  		id: "hours",
+				  		id: "hours1",
 				        title:"Monday Hours",
 				        start: data['mon_start'], 
 				        end: data['mon_end'], 
@@ -239,7 +251,7 @@
 						dow: [ 1 ] 
 					},
 				    {
-				    	id: "hours",
+				    	id: "hours2",
 				        title:"Tuesday Hours",
 				        start: data['tues_start'], 
 				        end: data['tues_end'], 
@@ -265,7 +277,7 @@
 						dow: [ 2 ] 
 					},
 				    {
-				    	id: "hours",
+				    	id: "hours3",
 				        title:"Wednesday Hours",
 				        start: data['wed_start'], 
 				        end: data['wed_end'], 
@@ -291,7 +303,7 @@
 						dow: [ 3 ] 
 					},
 				    {
-				    	id: "hours",
+				    	id: "hours4",
 				        title:"Thursday Hours",
 				        start: data['thurs_start'], 
 				        end: data['thurs_end'], 
@@ -317,7 +329,7 @@
 						dow: [ 4 ] 
 					},
 				    {
-				    	id: "hours",
+				    	id: "hours5",
 				        title:"Friday Hours",
 				        start: data['fri_start'], 
 				        end: data['fri_end'], 
@@ -343,7 +355,7 @@
 						dow: [ 5 ] 
 					},
 				    {
-				    	id: "hours",
+				    	id: "hours6",
 				        title:"Saturday Hours",
 				        start: data['sat_start'], 
 				        end: data['sat_end'], 
@@ -369,7 +381,7 @@
 						dow: [ 6 ] 
 					},
 				    {
-				    	id: "hours",
+				    	id: "hours0",
 				        title:"Sunday Hours",
 				        start: data['sun_start'], 
 				        end: data['sun_end'], 
@@ -406,9 +418,9 @@
 				    eventResize: function( event, delta, revertFunc, jsEvent, ui, view ) { 
 				    	if(myEvent(event)){
 				    		updateHours(event.start, event.end);
-				    		$('#stuff').html("sent");
+				    		//$('#stuff').html("sent");
 				    	}else{
-				    		$('#stuff').html("not");
+				    		//$('#stuff').html("not");
 				    	}
 
 				    }
@@ -448,41 +460,11 @@
 							<div class="single-post-title">
 								<h3>View Appointments</h3>
 							</div>
+							<div id="download"></div>
 							<div id="stuff"></div>
 							<div class="single-post-content" id="calendarContent">
 								<div id="calendar"></div>
-									<div id="createEventModal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-									    <div class="modal-header">
-									        <button type="button" class="close" onclick="dismissModal()" aria-hidden="true">x</button>
-									        <h3 id="myModalLabel1">Create Appointment</h3>
-									    </div>
-									    <div class="modal-body">
-									    <form id="createAppointmentForm" class="form-horizontal">
-									        <div class="control-group">
-									            <label class="control-label" for="inputPatient">Reason for Appointment:</label>
-									            <div class="controls">
-									                <input type="text" name="patientName" id="patientName" style="margin: 0 auto;" />
-									                  <input type="hidden" id="apptStartTime"/>
-									                  <input type="hidden" id="apptEndTime"/>
-									                  <input type="hidden" id="apptAllDay" />
-									            </div>
-									        </div>
-									        <div class="control-group">
-									        	<label class="control-label" for="doctor">Doctor:</label>
-									           	<div class="controls controls-row" id="doctor" style="margin-top:5px;"></div>
-									        </div>
-									        <div class="control-group">
-									            <label class="control-label" for="when">When:</label>
-									            <div class="controls controls-row" id="when" style="margin-top:5px;">
-									            </div>
-									        </div>
-									    </form>
-									    </div>
-									    <div class="modal-footer">
-									        <button class="btn" onclick="dismissModal()" aria-hidden="true">Cancel</button>
-									        <button type="submit" class="btn btn-primary" id="submitButton" >Save</button>
-									    </div>
-									</div>
+					
 							</div>
 						</div>
 					</div>

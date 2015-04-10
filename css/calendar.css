@@ -7,11 +7,17 @@
 }
 
 b{
-	  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #53555c;
   margin-bottom: 10px;
   font-size: 15.5px;
-    margin: 10px 0;
+  margin: 10px 0;
   font-weight: bold;
   line-height: 20px;
 }
+
+.download{
+	float: right;
+	font-size: 15px;
+}
+
