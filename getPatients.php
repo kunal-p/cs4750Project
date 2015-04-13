@@ -9,7 +9,7 @@
   $return_arr = array();
   if($stmt->prepare("SELECT * FROM patient natural join appointments WHERE license_id='12312'") or die("<br/>Error Building Query!<br/>" . mysqli_error($db_connection))) {
     $stmt->execute();
-    $stmt->bind_result($patient_id, $blood_type, $weight, $height, $first_name, $last_name, $middle_name, $email, $phone, $dob, $age, $address, $license_id, $start, $end, $purpose);
+    $stmt->bind_result($patient_id, $blood_type, $weight, $height, $first_name, $last_name, $middle_name, $email, $dob, $address, $license_id, $start, $end, $purpose);
       while ($stmt->fetch()) {
         echo "<li><input type=\"button\" class=\"btn-link\" onclick=\"getPatientInfo('$patient_id')\" value=\"$first_name $last_name\"></input></li>";
       }

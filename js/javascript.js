@@ -7,5 +7,5 @@ function showHeaderPatient(){
 }
 
 function showHeaderDoctor(){
-	 document.getElementById("header").innerHTML = '<div class="mainmenu-wrapper"><div class="container"><nav id="mainmenu" class="mainmenu"><ul><li class="logo-wrapper"><a href="index.html"><img src="img/mPurpose-logo.png" alt="Multipurpose Twitter Bootstrap Template"></a></li><li><a href="index.html">Home</a></li><li><a href="view-Patients">View Patients</a></li><li><a href="doctor-calender-view.html">View Schedule</a></li></ul></nav></div></div>';
+	 document.getElementById("header").innerHTML = '<div class="mainmenu-wrapper"><div class="container"><nav id="mainmenu" class="mainmenu"><ul><li class="logo-wrapper"><a href="index.html"><img src="img/mPurpose-logo.png" alt="Multipurpose Twitter Bootstrap Template"></a></li><li><a href="index.html">Home</a></li><li><a href="view-Patients.html">View Patients</a></li><li><a href="doctor-calender-view.html">View Schedule</a></li></ul></nav></div></div>';
 }
