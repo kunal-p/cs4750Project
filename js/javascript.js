@@ -3,7 +3,7 @@ function showFooter(){
 }
 
 function showHeaderPatient(){
-	 document.getElementById("header").innerHTML = '<div class="mainmenu-wrapper"><div class="container"><nav id="mainmenu" class="mainmenu"><ul><li class="logo-wrapper"><a href="index.html"><img src="img/mPurpose-logo.png" alt="Multipurpose Twitter Bootstrap Template"></a></li><li><a href="index.html">Home</a></li><li><a href="view-Doctors.html">View Doctors</a></li><li><a href="patient-calender-view.html">Make Appointment</a></li></ul></nav></div></div>';
+	 document.getElementById("header").innerHTML = '<div class="mainmenu-wrapper"><div class="container"><nav id="mainmenu" class="mainmenu"><ul><li class="logo-wrapper"><a href="index.html"><img src="img/mPurpose-logo.png" alt="Multipurpose Twitter Bootstrap Template"></a></li><li><a href="index.html">Home</a></li><li><a href="view-Doctors.html">View Doctors</a></li><li><a href="patient-calender-view.html">Make Appointment</a></li><li><a href="cancel-appointment.html">View/Cancel Appointments</a></li></ul></nav></div></div>';
 }
 
 function showHeaderDoctor(){

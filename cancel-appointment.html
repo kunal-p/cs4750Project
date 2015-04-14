@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Doctors</title>
+        <title>View/Cancel Appointments</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
@@ -29,12 +29,14 @@
         <script type="text/javascript">
 
         $("document").ready(function(){
-			$('#submitButton').onclick = function() { doSubmit(); };
+        	var id = "35546";
+			//$('#submitButton').onclick = function() { doSubmit(); };
 	        $.ajax({
-		      url: 'getHospitals.php',
+		      url: 'appointmentsPatient.php',
 		      type: 'post',
+		      data:{'id': id},
 		      success: function(data, status) {
-		          $('#allHospitals').html(data);
+		          $('#appointments').html(data);
 		      }
 		    }); // end ajax call
     	});
@@ -42,44 +44,22 @@
         var id;
         var events;
         </script>
-        <script type="text/javascript">
-        function getDepartments(id){
-	    	$( "#allDepartmentsHeader" ).removeClass( "hide" ).addClass( "show" );
-		    $.ajax({
-		      url: 'getDepartments.php',
-		      type: 'post',
-		      data: {'id': id},
-		      success: function(data, status) {
-		          $('#allDepartments').html(data);
-		      }
-		    }); // end ajax call
-	    }
-	    function getDoctors(dept){
-	    	$( "#allDoctorsHeader" ).removeClass( "hide" ).addClass( "show" );
-		    $.ajax({
-		      url: 'getDoctors.php',
-		      type: 'post',
-		      data: {'dept': dept},
-		      success: function(data, status) {
-		          $('#allDoctors').html(data);
-		      }
-		    }); 
-	    }
-
-	    function getEvents(id){
+        <script>
+        function cancelAppointment(btn_id,patient_id, license_id, start, end){
 	    	$.ajax({
-		      url: 'getDoctorInfo.php',
+		      url: 'cancelAppointment.php',
 		      type: 'post',
-		      data: {'id': id},
+		      data: {'license_id': license_id,
+		      		'patient_id':patient_id,
+		      		'start': moment(start).format('YYYY-MM-DD HH:mm:00'),
+		  			'end': moment(end).format('YYYY-MM-DD HH:mm:00') },
 		      success: function(data, status) {
-		          $('#doctorInfo').html(data);
 		      }
-		    }); 
-
-	    }
-
-
+		    });
+		    $('#'+btn_id).remove();
+        }
         </script>
+
     </head>
     <body>
 
@@ -97,28 +77,18 @@
 			</div>
 		</div>
         
-        <div class="section">
+        <div class="section" >
 	    	<div class="container">
 				<div class="row">
 					<!-- Sidebar -->
-					<div class="col-sm-4 blog-sidebar">
-						<h4>Select a Hospital</h4>
-						<ul class="recent-posts" id="allHospitals">
-						</ul>
-						<h4 class="hide" id="allDepartmentsHeader">Select a Department</h4>
-						<ul class="blog-categories" id="allDepartments">
-						</ul>
-						<h4 class="hide" id="allDoctorsHeader">Select a Doctor</h4>
-						<ul class="blog-categories" id="allDoctors">
-						</ul>
-					</div>
-					<!-- End Sidebar -->
-					<div class="col-sm-8">
+					<div class="col-sm-8" id="apt-container">
 						<div class="blog-post blog-single-post">
 							<div class="single-post-title">
-								<h2>Doctor Information</h2>
+								<h2>Appointments</h2>
 							</div>
-							<div id="doctorInfo"></div>
+							<div class="single-post-content" id="appointments">
+					
+							</div>
 
 						</div>
 					</div>

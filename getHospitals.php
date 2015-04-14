@@ -11,7 +11,7 @@
     $stmt->execute();
     $stmt->bind_result($id, $name);
       while ($stmt->fetch()) {
-        echo "<li><input type=\"button\" class=\"btn-link\" onclick=\"getDepartments()\" value=\"$name\"></input></li>";
+        echo "<li><input type=\"button\" class=\"btn-link\" onclick=\"getDepartments($id)\" value=\"$name\"></input></li>";
       }
     $stmt->close();
   }

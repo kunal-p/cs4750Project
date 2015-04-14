@@ -29,7 +29,7 @@
         <script type="text/javascript">
 
         $("document").ready(function(){
-		$('#submitButton').onclick = function() { doSubmit(); };
+		//$('#submitButton').onclick = function() { doSubmit(); };
         $.ajax({
 	      url: 'getHospitals.php',
 	      type: 'post',
@@ -45,24 +45,30 @@
         //$('#calendar').fullCalendar( 'refresh' );//going to have to call when update choices
         </script>
         <script type="text/javascript">
-	    function getDepartments(){
+	    function getDepartments(id){
 	    	$( "#allDepartmentsHeader" ).removeClass( "hide" ).addClass( "show" );
+	    	$( "#allDoctorsHeader" ).removeClass( "show" ).addClass( "hide" );
+	    	$( "#allDoctors" ).removeClass( "show" ).addClass( "hide" );
 		    $.ajax({
 		      url: 'getDepartments.php',
 		      type: 'post',
+		      data: {'id': id},
 		      success: function(data, status) {
 		          $('#allDepartments').html(data);
 		      }
 		    }); // end ajax call
 	    }
 	    function getDoctors(dept){
-	    	$( "#allDoctorsHeader" ).removeClass( "hide" ).addClass( "show" );
+	    	$( "#allDoctorsHeader" ).removeClass( "show" ).addClass( "hide" );
+	    	$( "#allDoctors" ).removeClass( "show" ).addClass( "hide" );
 		    $.ajax({
 		      url: 'getDoctors.php',
 		      type: 'post',
 		      data: {'dept': dept},
 		      success: function(data, status) {
 		          $('#allDoctors').html(data);
+		          $( "#allDoctorsHeader" ).removeClass( "hide" ).addClass( "show" );
+		          $( "#allDoctors" ).removeClass( "hide" ).addClass( "show" );
 		      }
 		    }); 
 	    }
@@ -418,10 +424,19 @@
 
 			          $('#submitButton').on('click', function(e){
 					    e.preventDefault();
-					    doSubmit();
+					    doSubmit(start, end);
 					  });
 
-					  function doSubmit(){
+			       }
+
+				});
+				var text = $("h2").text();
+				text = text.replace('â€”', '-');
+				$("h2").text(text);
+		      }
+		    }); // end ajax call
+
+				function doSubmit(start, end){
 					    $( "#createEventModal" ).removeClass( "show" ).addClass( "hide" );
 					    console.log($('#apptStartTime').val());
 					    console.log($('#apptEndTime').val());
@@ -437,31 +452,13 @@
 							constraint: 'hours',
 							editable: false
 						};
-
 						if(!isOverlappingOut(eventData) && !isOverlappingOther(eventData) && !isOverlappingPatient(eventData)){
-							$('#calendar').fullCalendar('renderEvent', eventData, false); // stick? = true
+							$('#calendar').fullCalendar('renderEvent', eventData, false);
 							makeAppointment($('#patientName').val(),start, end);
 						}
 
 						$('#calendar').fullCalendar('unselect');
 					}
-			       },
-
-					eventClick: function(calEvent, jsEvent, view){
-						if(myEvent(calEvent)){
-						cancelAppointment(id, calEvent.start, calEvent.end);
-					    $('#calendar').fullCalendar('removeEvents', function (event) {
-					        return event == calEvent;
-						});
-						}
-					}
-
-				});
-				var text = $("h2").text();
-				text = text.replace('â€”', '-');
-				$("h2").text(text);
-		      }
-		    }); // end ajax call
 	   }
         </script>
     </head>

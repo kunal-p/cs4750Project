@@ -5,10 +5,10 @@
     return null;
   }
 
+  $id = $_POST['id'];
   $stmt = $db_connection->stmt_init();
   $return_arr = array();
-  if($stmt->prepare("select distinct specialization from hospital natural join works_at natural join doctor
-") or die("<br/>Error Building Query!<br/>" . mysqli_error($db_connection))) {
+  if($stmt->prepare("select distinct specialization from hospital natural join works_at natural join doctor WHERE hospital.hospital_id = $id") or die("<br/>Error Building Query!<br/>" . mysqli_error($db_connection))) {
     $stmt->execute();
     $stmt->bind_result($specialization);
       while ($stmt->fetch()) {
