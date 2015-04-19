@@ -1,11 +1,12 @@
 <?php
-	$db_connection = new mysqli("stardock.cs.virginia.edu", "cs4750bh3ay", "cs2015", "cs4750bh3ay");
+session_start();//starting session
+include_once("./users.php");
+$db_connection = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 	if (mysqli_connect_errno()) {
 		echo("Can't connect to MySQL Server. Error code: " .  mysqli_connect_error());
 		return null;
 	}
-	//$id = $_SESSION['id'];
-	$id = '12312';
+	$id = $_SESSION['id'];
 	$start =$_POST['start'];
 	$end = $_POST['end'];
 	$dayEnd = $_POST['dayEnd'];

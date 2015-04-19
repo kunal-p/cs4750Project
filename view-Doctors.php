@@ -1,3 +1,17 @@
+<?php
+session_start();//starting session
+$id;
+if(isset($_SESSION['id'])){
+	if($_SESSION['type'] == 0){
+		$id = $_SESSION['id'];
+	}else{
+		header('Location: index.html');
+	}
+} else{
+	header('Location: index.html');
+}
+?>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -7,7 +21,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>View/Cancel Appointments</title>
+        <title>Doctors</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
@@ -29,37 +43,57 @@
         <script type="text/javascript">
 
         $("document").ready(function(){
-        	var id = "35546";
-			//$('#submitButton').onclick = function() { doSubmit(); };
+			$('#submitButton').onclick = function() { doSubmit(); };
 	        $.ajax({
-		      url: 'appointmentsPatient.php',
+		      url: 'getHospitals.php',
 		      type: 'post',
-		      data:{'id': id},
 		      success: function(data, status) {
-		          $('#appointments').html(data);
+		          $('#allHospitals').html(data);
 		      }
 		    }); // end ajax call
     	});
 
-        var id;
+        var id = <?php echo $id;?>;
         var events;
         </script>
-        <script>
-        function cancelAppointment(btn_id,patient_id, license_id, start, end){
-	    	$.ajax({
-		      url: 'cancelAppointment.php',
+        <script type="text/javascript">
+        function getDepartments(id){
+	    	$( "#allDepartmentsHeader" ).removeClass( "hide" ).addClass( "show" );
+		    $.ajax({
+		      url: 'getDepartments.php',
 		      type: 'post',
-		      data: {'license_id': license_id,
-		      		'patient_id':patient_id,
-		      		'start': moment(start).format('YYYY-MM-DD HH:mm:00'),
-		  			'end': moment(end).format('YYYY-MM-DD HH:mm:00') },
+		      data: {'id': id},
 		      success: function(data, status) {
+		          $('#allDepartments').html(data);
 		      }
-		    });
-		    $('#'+btn_id).remove();
-        }
-        </script>
+		    }); // end ajax call
+	    }
+	    function getDoctors(dept){
+	    	$( "#allDoctorsHeader" ).removeClass( "hide" ).addClass( "show" );
+		    $.ajax({
+		      url: 'getDoctors.php',
+		      type: 'post',
+		      data: {'dept': dept},
+		      success: function(data, status) {
+		          $('#allDoctors').html(data);
+		      }
+		    }); 
+	    }
 
+	    function getEvents(id){
+	    	$.ajax({
+		      url: 'getDoctorInfo.php',
+		      type: 'post',
+		      data: {'id': id},
+		      success: function(data, status) {
+		          $('#doctorInfo').html(data);
+		      }
+		    }); 
+
+	    }
+
+
+        </script>
     </head>
     <body>
 
@@ -77,18 +111,28 @@
 			</div>
 		</div>
         
-        <div class="section" >
+        <div class="section">
 	    	<div class="container">
 				<div class="row">
 					<!-- Sidebar -->
-					<div class="col-sm-8" id="apt-container">
+					<div class="col-sm-4 blog-sidebar">
+						<h4>Select a Hospital</h4>
+						<ul class="recent-posts" id="allHospitals">
+						</ul>
+						<h4 class="hide" id="allDepartmentsHeader">Select a Department</h4>
+						<ul class="blog-categories" id="allDepartments">
+						</ul>
+						<h4 class="hide" id="allDoctorsHeader">Select a Doctor</h4>
+						<ul class="blog-categories" id="allDoctors">
+						</ul>
+					</div>
+					<!-- End Sidebar -->
+					<div class="col-sm-8">
 						<div class="blog-post blog-single-post">
 							<div class="single-post-title">
-								<h2>Appointments</h2>
+								<h2>Doctor Information</h2>
 							</div>
-							<div class="single-post-content" id="appointments">
-					
-							</div>
+							<div id="doctorInfo"></div>
 
 						</div>
 					</div>

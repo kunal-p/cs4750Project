@@ -1,6 +1,10 @@
 <?php
+if($_SERVER["HTTPS"] != "on"){
+  header("Location: https://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]);
+}
+session_start();//starting session
 
-	$db_connection = new mysqli('stardock.cs.virginia.edu', 'cs4750bh3ay', 'cs2015', 'cs4750bh3ay');
+	$db_connection = new mysqli('stardock.cs.virginia.edu', 'cs4750bh3ayd', 'registerDB', 'cs4750bh3ay');
   	if (mysqli_connect_errno()) {
 		echo "NOOOOOO!!!!!";
 	}
@@ -61,6 +65,8 @@
 		while($stmt->fetch()){
 			echo "WORKS";
 		}
+		$_SESSION['id'] = $randID;
+		$_SESSION['type'] = 0;
 	}
 
 

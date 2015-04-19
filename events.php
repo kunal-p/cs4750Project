@@ -1,5 +1,6 @@
 <?php
-	$db_connection = new mysqli("stardock.cs.virginia.edu", "cs4750bh3ay", "cs2015", "cs4750bh3ay");
+include_once("./users.php");
+$db_connection = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 	if (mysqli_connect_errno()) {
 		echo("Can't connect to MySQL Server. Error code: " .  mysqli_connect_error());
 		return null;

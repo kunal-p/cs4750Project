@@ -1,3 +1,17 @@
+<?php
+session_start();//starting session
+$id;
+if(isset($_SESSION['id'])){
+	if($_SESSION['type'] == 0){
+		$id = $_SESSION['id'];
+	}else{
+		header('Location: index.html');
+	}
+} else{
+	header('Location: index.html');
+}
+?>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -40,7 +54,7 @@
     	});
         var hospital;
         var department;
-        var id;
+        var id <?php echo $id; ?>;
         var events;
         //$('#calendar').fullCalendar( 'refresh' );//going to have to call when update choices
         </script>
