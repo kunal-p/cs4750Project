@@ -1,18 +1,15 @@
 <?php
-if($_SERVER["HTTPS"] != "on"){
-  header("Location: https://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]);
-}
 session_start();//starting session
 
-	$db_connection = new mysqli('stardock.cs.virginia.edu', 'cs4750bh3ayd', 'registerDB', 'cs4750bh3ay');
+	$db_connection = new mysqli('stardock.cs.virginia.edu', 'cs4750bh3ay', 'cs2015', 'cs4750bh3ay');
   	if (mysqli_connect_errno()) {
 		echo "NOOOOOO!!!!!";
 	}
 	echo "works somewhat:";
-	echo $_POST("lastname");
+	echo $_POST["password"];
 	$username = mysql_escape_string($_POST["username"]);
 	$password = mysql_escape_string($_POST["password"]);
-	$confirm_password = mysql_escape_string($_POST["confirm_password"]);
+	$confirm_password = mysql_escape_string($_POST["password2"]);
 	$email = mysql_escape_string($_POST["email"]);
 	$firstname = mysql_escape_string($_POST["firstname"]);
 	$middlename = mysql_escape_string($_POST["middlename"]);
@@ -26,8 +23,8 @@ session_start();//starting session
 	$meds = mysql_escape_string($_POST["meds"]);
 	$randID = getRandomString(5);
 	$flag = 0;
-	echo $lastname;
-	if ($password != $confirm_password) {
+	echo $confirm_password;
+	if ($password !== $confirm_password) {
 		echo "Your passwords didn't match!";
 		sys.exit();
 	}
@@ -70,7 +67,7 @@ session_start();//starting session
 		echo $username;
 		$_SESSION['id'] = $randID;
 		$_SESSION['type'] = 0;
-		//header("Location: router.php");
+		header("Location: router.php");
 	}
 
 
