@@ -8,7 +8,8 @@ session_start();//starting session
   	if (mysqli_connect_errno()) {
 		echo "NOOOOOO!!!!!";
 	}
-	echo "works somewhat";
+	echo "works somewhat:";
+	echo $_POST("lastname");
 	$username = mysql_escape_string($_POST["username"]);
 	$password = mysql_escape_string($_POST["password"]);
 	$confirm_password = mysql_escape_string($_POST["confirm_password"]);
@@ -25,6 +26,7 @@ session_start();//starting session
 	$meds = mysql_escape_string($_POST["meds"]);
 	$randID = getRandomString(5);
 	$flag = 0;
+	echo $lastname;
 	if ($password != $confirm_password) {
 		echo "Your passwords didn't match!";
 		sys.exit();
@@ -65,8 +67,10 @@ session_start();//starting session
 		while($stmt->fetch()){
 			echo "WORKS";
 		}
+		echo $username;
 		$_SESSION['id'] = $randID;
 		$_SESSION['type'] = 0;
+		//header("Location: router.php");
 	}
 
 

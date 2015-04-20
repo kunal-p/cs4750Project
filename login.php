@@ -27,11 +27,13 @@ if($_SERVER["HTTPS"] != "on"){
 				$_SESSION['username'] = $username;
 				$_SESSION['id'] = $id;
 				$_SESSION['type'] = $type;
-				echo "Currently logged on as ".$username."<br>";
+				header("Location: router.php");
 			}
 		}
 	}
 	if ($bool == 0) {
+		echo $username;
+		echo $password;
 		echo "INCORRECT USER OR PASSWORD";
 	}
 ?>
