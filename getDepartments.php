@@ -1,7 +1,7 @@
 <?php
 include_once("./users.php");
 $db_connection = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
-echo $SERVER.$USERNAME.$PASSWORD.$DATABASE;
+//echo $SERVER.$USERNAME.$PASSWORD.$DATABASE;
   if (mysqli_connect_errno()) {
     echo("Can't connect to MySQL Server. Error code: " .  mysqli_connect_error());
     return null;

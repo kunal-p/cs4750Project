@@ -2,7 +2,7 @@
 session_start();//starting session
 $id;
 if(isset($_SESSION['id'])){
-	if($_SESSION['type'] == 1){
+	if($_SESSION['type'] == 0){
 		$id = $_SESSION['id'];
 	}else{
 		header('Location: index.html');
@@ -21,7 +21,7 @@ if(isset($_SESSION['id'])){
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Patients</title>
+        <title>View/Cancel Appointments</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
@@ -41,70 +41,66 @@ if(isset($_SESSION['id'])){
         <script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src="js/javascript.js"></script>
         <script type="text/javascript">
-        var id = '<?php echo $id;?>';
-        var events;
+        var id = '<?php echo $id; ?>';
         $("document").ready(function(){
-	    	getPatients();
+			//$('#submitButton').onclick = function() { doSubmit(); };
+	        $.ajax({
+		      url: 'appointmentsPatient.php',
+		      type: 'post',
+		      data:{'id': id},
+		      success: function(data, status) {
+		          $('#appointments').html(data);
+		      }
+		    }); // end ajax call
     	});
 
+        var events;
         </script>
-        <script type="text/javascript">
-	    function getPatients(){
-		    $.ajax({
-		      url: 'getPatients.php',
+        <script>
+        function cancelAppointment(btn_id,patient_id, license_id, start, end){
+	    	$.ajax({
+		      url: 'cancelAppointment.php',
 		      type: 'post',
-		      data: {'id': id},
+		      data: {'license_id': license_id,
+		      		'patient_id':patient_id,
+		      		'start': moment(start).format('YYYY-MM-DD HH:mm:00'),
+		  			'end': moment(end).format('YYYY-MM-DD HH:mm:00') },
 		      success: function(data, status) {
-		          $('#patients').html(data);
 		      }
-		    }); 
-	    }
-	    function getPatientInfo(id){
-		    $.ajax({
-		      url: 'getPatientInfo.php',
-		      type: 'post',
-		      data: {'id': id},
-		      success: function(data, status) {
-		          $('#patientInfo').html(data);
-		      }
-		    }); 
-	    }
-
-
+		    });
+		    $('#'+btn_id).remove();
+        }
         </script>
+
     </head>
     <body>
 
     	<div id="header"></div>
-    	<script type="text/javascript">showHeaderDoctor();</script>
+    	<script type="text/javascript">showHeaderPatient();</script>
 
         <!-- Page Title -->
 		<div class="section section-breadcrumbs">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<h1>View Patients</h1>
+						<h1>View Doctors</h1>
 					</div>
 				</div>
 			</div>
 		</div>
         
-        <div class="section">
+        <div class="section" >
 	    	<div class="container">
 				<div class="row">
 					<!-- Sidebar -->
-					<div class="col-sm-4 blog-sidebar">
-						<h4>Current Patients</h4>
-						<ul class="recent-posts" id="patients">
-						</ul>
-					</div>
-					<!-- End Sidebar -->
-					<div class="col-sm-8">
+					<div class="col-sm-8" id="apt-container">
 						<div class="blog-post blog-single-post">
 							<div class="single-post-title">
-								<h2>Patient Information</h2>
+								<h2>Appointments</h2>
 							</div>
-							<div id="patientInfo"></div>
+							<div class="single-post-content" id="appointments">
+					
+							</div>
 
 						</div>
 					</div>

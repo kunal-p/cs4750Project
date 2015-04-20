@@ -7,14 +7,16 @@ $db_connection = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 	}
 
 	$stmt = $db_connection->stmt_init();
-	$id = $_POST['id'];
+	$patient_id = $_POST['patient_id'];
+	$license_id = $_POST['license_id'];
 	$reason = $_POST['reason'];
 	$start = $_POST['start'];
 	$end = $_POST['end'];
-	if($stmt->prepare("	insert into `appointments`(`patient_id`, `license_id`, `start`, `end`,`purpose`) values ('35546','$id','$start','$end','$reason')") or die("<br/>Error Building Query!<br/>" . mysqli_error($db_connection))) {
+	if($stmt->prepare("	insert into `appointments`(`patient_id`, `license_id`, `start`, `end`,`purpose`) values ('$patient_id','$license_id','$start','$end','$reason')") or die("<br/>Error Building Query!<br/>" . mysqli_error($db_connection))) {
 		$stmt->execute();
 		$stmt->close();
-		echo $id." ";
+		echo $patient_id." ";
+		echo $license_id." ";
 		echo $reason." ";
 		echo $start." ";
 		echo $end;

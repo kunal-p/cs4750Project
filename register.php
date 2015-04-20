@@ -21,6 +21,7 @@ session_start();//starting session
 	$bloodtype = mysql_escape_string($_POST["bloodtype"]);
 	$phone = mysql_escape_string($_POST["phone"]);
 	$meds = mysql_escape_string($_POST["meds"]);
+	$allergy = mysql_escape_string($_POST["allergy"]);
 	$randID = getRandomString(5);
 	$flag = 0;
 	echo $confirm_password;
