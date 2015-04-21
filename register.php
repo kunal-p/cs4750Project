@@ -8,7 +8,7 @@ session_start();//starting session
 	echo "works somewhat:";
 	echo $_POST["password"];
 	$username = mysql_escape_string($_POST["username"]);
-	$password = mysql_escape_string($_POST["password"]);
+	$password = ($_POST["password"]);
 	$confirm_password = mysql_escape_string($_POST["password2"]);
 	$email = mysql_escape_string($_POST["email"]);
 	$firstname = mysql_escape_string($_POST["firstname"]);
@@ -21,7 +21,6 @@ session_start();//starting session
 	$bloodtype = mysql_escape_string($_POST["bloodtype"]);
 	$phone = mysql_escape_string($_POST["phone"]);
 	$meds = mysql_escape_string($_POST["meds"]);
-	$allergy = mysql_escape_string($_POST["allergy"]);
 	$randID = getRandomString(5);
 	$flag = 0;
 	echo $confirm_password;
@@ -56,15 +55,12 @@ session_start();//starting session
 			}
 		}
 	}
-
+	$password = hash('sha256', $password);
+	
 	$stmt = $db_connection->stmt_init();
 	if($stmt->prepare("CALL insertPersonInfo('$randID', '$firstname', '$lastname', '$middlename', '$bloodtype', '$weight', '$height', '$email', '$dob', '$address', '$allergy', '$phone', '$meds', '$username', '$password')")) {
 		echo "THE STATEMENT IS VALID";
 		$stmt->execute();
-		$stmt->bind_result($username2, $email2, $id2);
-		while($stmt->fetch()){
-			echo "WORKS";
-		}
 		echo $username;
 		$_SESSION['id'] = $randID;
 		$_SESSION['type'] = 0;
