@@ -2,7 +2,7 @@
 session_start();//starting session
 $id;
 if(isset($_SESSION['id'])){
-        if($_SESSION['type'] == 0){
+        if($_SESSION['type'] == 1){
                 $id = $_SESSION['id'];
         }else{
                 header('Location: index.html');
@@ -45,7 +45,7 @@ if(isset($_SESSION['id'])){
 
 
     	<div id="header"></div>
-    	<script type="text/javascript">showHeaderPatient();</script>
+    	<script type="text/javascript">showHeaderDoctor();</script>
     	<!-- <script type="text/javascript">showHeaderDoctor();</script> -->
 	    
 	<!-- Content-->
@@ -80,7 +80,7 @@ if(isset($_SESSION['id'])){
 			return null;
 		}
 		$stmt = $db_connection->stmt_init();
- 		if($stmt->prepare("SELECT * FROM patient WHERE patient_id='$id'") or die("<br/>Error Building Query!<br/>" . mysqli_error($db_connection))) {
+ 		if($stmt->prepare("SELECT * FROM doctor WHERE license_id='$id'") or die("<br/>Error Building Query!<br/>" . mysqli_error($db_connection))) {
     			$stmt->execute();
     			$stmt->bind_result($blood_type, $weight, $height, $patient_id, $first_name, $last_name, $middle_name, $email, $dob, $address);
 			while($stmt->fetch()){
