@@ -1,5 +1,5 @@
 function showFooter(){
-	document.getElementById("footer").innerHTML = '<div class="footer"><div class="container"><div class="row"><div class="col-footer col-md-4 col-xs-6"><h3>Group Members</h3><p class="contact-us-details"><b>Boyang Huang (bh3ay)</b><br/> <b>Kunal Patel (kp2ef)</b><br/> <b>Miwa Tritt (tmt7rc)</b><br/> <b>Teddy Peneva (tzp5vg)</b><br/> </p></div></div></div></div>';
+	document.getElementById("footer").innerHTML = '<div class="footer"><div class="container"><div class="row"><div class="col-footer col-md-4 col-xs-6"><h3>Group Members</h3><p class="contact-us-details"><b>Boyang Huang (bh3ay)</b><br/> <b>Kunal Patel (kp2ef)</b><br/> <b>Miwa Tritt (tmt7rc)</b><br/> </p></div></div></div></div>';
 }
 
 function showHeaderPatient(){
