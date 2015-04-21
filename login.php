@@ -1,7 +1,7 @@
 <?php
-if($_SERVER["HTTPS"] != "on"){
-  header("Location: https://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]);
-}
+//if($_SERVER["HTTPS"] != "on"){
+//  header("Location: https://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]);
+//}
 	session_start();//starting session
 	$db_connection = new mysqli('stardock.cs.virginia.edu', 'cs4750bh3aya', 'loginDB', 'cs4750bh3ay');
   	if (mysqli_connect_errno()) {

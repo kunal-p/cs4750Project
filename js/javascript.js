@@ -3,11 +3,11 @@ function showFooter(){
 }
 
 function showHeaderPatient(){
-	 document.getElementById("header").innerHTML = '<div class="mainmenu-wrapper"><div class="container"><nav id="mainmenu" class="mainmenu"><ul><li class="logo-wrapper"><a href="index.html"><img src="img/logo.png" alt="Multipurpose Twitter Bootstrap Template"></a></li><li><a href="index.html">Home</a></li><li><a href="page-view-Doctors.php">View Doctors</a></li><li><a href="page-patient-calender-view.php">Make Appointment</a></li><li><a href="page-cancel-appointment.php">View/Cancel Appointments</a></li><li><form action="logout.php"><input class="btn" type="submit" value="Logout"></form></li></ul></nav></div></div>';
+	 document.getElementById("header").innerHTML = '<div class="mainmenu-wrapper"><div class="container"><nav id="mainmenu" class="mainmenu"><ul><li class="logo-wrapper"><a href="patient.php"><img src="img/logo.png" alt="Multipurpose Twitter Bootstrap Template"></a></li><li><a href="patient.php">Home</a></li><li><a href="page-view-Doctors.php">View Doctors</a></li><li><a href="page-patient-calender-view.php">Make Appointment</a></li><li><a href="page-cancel-appointment.php">View/Cancel Appointments</a></li><li><form action="logout.php"><input class="btn" type="submit" value="Logout"></form></li></ul></nav></div></div>';
 }
 
 function showHeaderDoctor(){
-	 document.getElementById("header").innerHTML = '<div class="mainmenu-wrapper"><div class="container"><nav id="mainmenu" class="mainmenu"><ul><li class="logo-wrapper"><a href="index.html"><img src="img/logo.png" alt="Multipurpose Twitter Bootstrap Template"></a></li><li><a href="index.html">Home</a></li><li><a href="page-view-Patients.php">View Patients</a></li><li><a href="page-doctor-calender-view.php">View Schedule</a></li><li><form action="logout.php"><input class="btn" type="submit" value="Logout"></form></li></ul></nav></div></div>';
+	 document.getElementById("header").innerHTML = '<div class="mainmenu-wrapper"><div class="container"><nav id="mainmenu" class="mainmenu"><ul><li class="logo-wrapper"><a href="doctor.php"><img src="img/logo.png" alt="Multipurpose Twitter Bootstrap Template"></a></li><li><a href="doctor.php">Home</a></li><li><a href="page-view-Patients.php">View Patients</a></li><li><a href="page-doctor-calender-view.php">View Schedule</a></li><li><form action="logout.php"><input class="btn" type="submit" value="Logout"></form></li></ul></nav></div></div>';
 }
 
 function showHeaderNewUser(){

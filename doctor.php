@@ -74,16 +74,17 @@ if(isset($_SESSION['id'])){
               
 		<?php
 		include_once("./users.php");
+
 		$db_connection = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
 		if (mysqli_connect_errno()) {
 			echo("Can't connect to MySQL Server. Error code: " .  mysqli_connect_error());
 			return null;
 		}
 		$stmt = $db_connection->stmt_init();
- 		if($stmt->prepare("SELECT * FROM doctor WHERE license_id='$id'") or die("<br/>Error Building Query!<br/>" . mysqli_error($db_connection))) {
+ 		if($stmt->prepare("SELECT first_name, last_name, middle_name, specialization, email, dob, address FROM doctor WHERE license_id='$id'") or die("<br/>Error Building Query!<br/>" . mysqli_error($db_connection))) {
     			$stmt->execute();
-    			$stmt->bind_result($blood_type, $weight, $height, $patient_id, $first_name, $last_name, $middle_name, $email, $dob, $address);
-			while($stmt->fetch()){
+		$stmt->bind_result($first_name, $last_name, $middle_name, $specialization, $email, $dob, $address);
+		while($stmt->fetch()){
 				echo "<table class=\"table\">";
 		       		echo "<tr><td><b>First Name:</b></td> <td><a href='#' id='first_name' data-type:'text' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$first_name</a></td> </tr>";
 		     	   	
@@ -91,38 +92,11 @@ if(isset($_SESSION['id'])){
 
 				echo " <tr><td><b>Middle Name:</b></td><td><a href='#' id='middle_name' data-type:'text' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$middle_name</a></td> </tr>";
 		    	    	echo " <tr><td><b>Last Name:</b></td> <td><a href='#' id='last_name' data-type:'text' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$last_name</a></td> </tr>";
-		        	echo " <tr><td><b>Blood Type:</b></td> <td><a href='#' id='blood_type' data-type:'text' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$blood_type</td> </tr>";
-		        	echo " <tr><td><b>Weight:</b></td> <td><a href='#' id='weight' data-type:'number' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$weight</a></td> </tr>";
-		        	echo " <tr><td><b>Height:</b></td> <td><a href='#' id='height' data-type:'text' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$height</td> </tr>";
+		        	echo " <tr><td><b>Specialization:</b></td> <td><a href='#' id='blood_type' data-type:'text' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$specialization</td> </tr>";
        		 		echo " <tr><td><b>DOB:</b></td> <td><a href='#' id='dob' data-type:'date' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$dob</td> </tr>";
 				echo " <tr><td><b>Email:</b></td> <td><a href='#' id='email' data-type:'text' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$email</td> </tr>";
 			        echo " <tr><td><b>Address:</b></td> <td><a href='#' id='address' data-type:'text' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$address</td> </tr>";
 				
-				if($stmt->prepare("SELECT medication FROM medication WHERE patient_id='$id'") or die("<br/>Error Building Query!<br/>" . mysqli_error($db_connection))) {
-		         		$stmt->execute();
-          				$stmt->bind_result($medication);
-          				echo " <tr><td><b>Medication:</b></td>";
-          				while ($stmt->fetch()) {
-            					echo "<td><a href='#' id='medication' data-type:'text' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$medication</td></tr>";
-          				}
-        			}		
-        			if($stmt->prepare("SELECT allergy FROM allergy WHERE patient_id='$id'") or die("<br/>Error Building Query!<br/>" . mysqli_error($db_connection))) {
-          				$stmt->execute();
-          				$stmt->bind_result($allergy);
-          				echo " <tr><td><b>Allergies:</b></td>";
-          				while ($stmt->fetch()) {
-            					echo "<td><a href='#' id='allergy' data-type:'text' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$allergy</td></tr>";
-          				}
-				}
-        			if($stmt->prepare("SELECT phone_number FROM patient_phone WHERE patient_id='$id'") or die("<br/>Error Building Query!<br/>" . mysqli_error($db_connection))) {
-          				$stmt->execute();
-          				$stmt->bind_result($phone);
-          				echo " <tr><td><b>Phone:</b></td>";
-          				while ($stmt->fetch()) {
-            					echo "<td><a href='#' id='phone' data-type:'text' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$phone</td></tr>";
-          				}
-        			}
-
 
 
 
@@ -139,16 +113,15 @@ if(isset($_SESSION['id'])){
             </div>
             <!--/col-->          
             <div class="clearfix"></div>
+	     <div class="col-xs-12 col-sm-4"></div>
+            <!--/col-->
+
             <div class="col-xs-12 col-sm-4">
-              <a class="btn btn-success btn-block" href="/~kp2ef/page-view-Doctors.php"><span class="fa fa-plus-circle"></span> View Doctors </a>
+              <a class="btn btn-info btn-block" href="/~kp2ef/page-view-patients.php"><span class="fa fa-user"></span> View Patients </a>
             </div>
             <!--/col-->
             <div class="col-xs-12 col-sm-4">
-              <a class="btn btn-info btn-block" href="/~kp2ef/page-patient-calender-view.php"><span class="fa fa-user"></span> Make Appointments </a>
-            </div>
-            <!--/col-->
-            <div class="col-xs-12 col-sm-4">
-              <a type="button" class="btn btn-primary btn-block" href="/~kp2ef/page-cancel-appointment"><span class="fa fa-gear"></span> View Appointments </a>  
+              <a type="button" class="btn btn-primary btn-block" href="/~kp2ef/page-doctor-calender-view.php"><span class="fa fa-gear"></span> View Appointments </a>  
             </div>
             <!--/col-->
           </div>
