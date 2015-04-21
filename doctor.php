@@ -117,7 +117,7 @@ if(isset($_SESSION['id'])){
             <!--/col-->
 
             <div class="col-xs-12 col-sm-4">
-              <a class="btn btn-info btn-block" href="/~kp2ef/page-view-patients.php"><span class="fa fa-user"></span> View Patients </a>
+              <a class="btn btn-info btn-block" href="/~kp2ef/page-view-Patients.php"><span class="fa fa-user"></span> View Patients </a>
             </div>
             <!--/col-->
             <div class="col-xs-12 col-sm-4">
