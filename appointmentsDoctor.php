@@ -8,14 +8,14 @@
 	$id =$_GET['id'];
 	$return_arr = array();
 	$stmt = $db_connection->stmt_init();
-		if($stmt->prepare("select purpose,start,end from appointments where license_id='$id'") or die("<br/>Error Building Query!<br/>" . mysqli_error($db_connection))) {
+		if($stmt->prepare("select patient_id,purpose,start,end from appointments where license_id='$id'") or die("<br/>Error Building Query!<br/>" . mysqli_error($db_connection))) {
 		$stmt->execute();
-		$stmt->bind_result($purpose,$start, $end);
+		$stmt->bind_result($id,$purpose,$start, $end);
 	    while ($stmt->fetch()) {
 		    $row_array['start'] = $start;
 		    $row_array['end'] = $end;
 		    $row_array['id'] = "patient";
-		    $row_array['title'] = "Purpose: ".$purpose;
+		    $row_array['title'] = "ID: ".$id." Purpose: ".$purpose;
 		    //color: 'blue',    // an option!
 			//textColor: 'white',  // an option!
 			//editable: false,

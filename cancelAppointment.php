@@ -5,8 +5,8 @@ $db_connection = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
     echo("Can't connect to MySQL Server. Error code: " .  mysqli_connect_error());
     return null;
   }
-  $license_id=$_POST['license_id'];
-  $patient_id=$_POST['patient_id'];
+  $patient_id = $_POST['patient_id'];
+  $license_id = $_POST['license_id'];
   $start = $_POST['start'];
   $end = $_POST['end'];
   $stmt = $db_connection->stmt_init();

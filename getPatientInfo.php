@@ -12,7 +12,7 @@ $db_connection = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
   $stmt = $db_connection->stmt_init();
   if($stmt->prepare("SELECT * FROM patient WHERE patient_id='$id'") or die("<br/>Error Building Query!<br/>" . mysqli_error($db_connection))) {
     $stmt->execute();
-    $stmt->bind_result($patient_id, $blood_type, $weight, $height, $first_name, $last_name, $middle_name, $email, $dob, $address);
+    $stmt->bind_result($blood_type, $weight, $height, $patient_id, $first_name, $last_name, $middle_name, $email, $dob, $address);
       while ($stmt->fetch()) {
         echo "<table class=\"table\">";
         echo "<tr><td><b>Patient ID:</b></td> <td>$patient_id</td> </tr>";
@@ -27,7 +27,9 @@ $db_connection = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
         if($stmt->prepare("SELECT medication FROM medication WHERE patient_id='$id'") or die("<br/>Error Building Query!<br/>" . mysqli_error($db_connection))) {
           $stmt->execute();
           $stmt->bind_result($medication);
-          echo " <tr><td><b>Medication:</b></td></tr>";
+          if($stmt->fetch()) {
+            echo " <tr><td><b>Medication:</b></td>  <td>$medication</td> </tr>";
+          }
           while ($stmt->fetch()) {
             echo "<tr><td></td><td>$medication</td></tr>";
           }
@@ -35,7 +37,9 @@ $db_connection = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
         if($stmt->prepare("SELECT allergy FROM allergy WHERE patient_id='$id'") or die("<br/>Error Building Query!<br/>" . mysqli_error($db_connection))) {
           $stmt->execute();
           $stmt->bind_result($allergy);
-          echo " <tr><td><b>Allergies:</b></td></tr>";
+          if($stmt->fetch()) {
+            echo " <tr><td><b>Allergies:</b></td>  <td>$allergy</td> </tr>";
+          }
           while ($stmt->fetch()) {
             echo "<tr><td></td><td>$allergy</td></tr>";
           }
@@ -44,7 +48,9 @@ $db_connection = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
         if($stmt->prepare("SELECT phone_number FROM patient_phone WHERE patient_id='$id'") or die("<br/>Error Building Query!<br/>" . mysqli_error($db_connection))) {
           $stmt->execute();
           $stmt->bind_result($phone);
-          echo " <tr><td><b>Phone:</b></td></tr>";
+          if($stmt->fetch()) {
+            echo " <tr><td><b>Phone:</b></td>  <td>$phone</td> </tr>";
+          }
           while ($stmt->fetch()) {
             echo "<tr><td></td><td>$phone</td></tr>";
           }
