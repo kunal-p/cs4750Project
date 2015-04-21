@@ -24,6 +24,12 @@ session_start();//starting session
 	$allergy =  mysql_escape_string($_POST["allergy"]);
 	$randID = getRandomString(5);
 	$flag = 0;
+		if ($meds === "") {
+		$meds = "None";
+	}
+	if ($allergy === "") {
+		$allergy = "None";
+	}
 	echo $confirm_password;
 	if ($password !== $confirm_password) {
 		echo "Your passwords didn't match!";
