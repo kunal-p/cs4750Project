@@ -86,16 +86,16 @@ if(isset($_SESSION['id'])){
 		$stmt->bind_result($first_name, $last_name, $middle_name, $specialization, $email, $dob, $address);
 		while($stmt->fetch()){
 				echo "<table class=\"table\">";
-		       		echo "<tr><td><b>First Name:</b></td> <td><a href='#' id='first_name' data-type:'text' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$first_name</a></td> </tr>";
+		       		echo "<tr><td><b>First Name:</b></td> <td><a href='#' id='first_name' data-type:'text' data-pk='$id' data-url='updateDoctor.php' data-title='Update'>$first_name</a></td> </tr>";
 		     	   	
 
 
-				echo " <tr><td><b>Middle Name:</b></td><td><a href='#' id='middle_name' data-type:'text' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$middle_name</a></td> </tr>";
-		    	    	echo " <tr><td><b>Last Name:</b></td> <td><a href='#' id='last_name' data-type:'text' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$last_name</a></td> </tr>";
-		        	echo " <tr><td><b>Specialization:</b></td> <td><a href='#' id='blood_type' data-type:'text' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$specialization</td> </tr>";
-       		 		echo " <tr><td><b>DOB:</b></td> <td><a href='#' id='dob' data-type:'date' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$dob</td> </tr>";
-				echo " <tr><td><b>Email:</b></td> <td><a href='#' id='email' data-type:'text' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$email</td> </tr>";
-			        echo " <tr><td><b>Address:</b></td> <td><a href='#' id='address' data-type:'text' data-pk='$id' data-url='updatePatient.php' data-title='Update'>$address</td> </tr>";
+				echo " <tr><td><b>Middle Name:</b></td><td><a href='#' id='middle_name' data-type:'text' data-pk='$id' data-url='updateDoctor.php' data-title='Update'>$middle_name</a></td> </tr>";
+		    	    	echo " <tr><td><b>Last Name:</b></td> <td><a href='#' id='last_name' data-type:'text' data-pk='$id' data-url='updateDoctor.php' data-title='Update'>$last_name</a></td> </tr>";
+		        	echo " <tr><td><b>Specialization:</b></td> <td><a href='#' id='blood_type' data-type:'text' data-pk='$id' data-url='updateDoctor.php' data-title='Update'>$specialization</td> </tr>";
+       		 		echo " <tr><td><b>DOB:</b></td> <td><a href='#' id='dob' data-type:'date' data-pk='$id' data-url='updateDoctor.php' data-title='Update'>$dob</td> </tr>";
+				echo " <tr><td><b>Email:</b></td> <td><a href='#' id='email' data-type:'text' data-pk='$id' data-url='updateDoctor.php' data-title='Update'>$email</td> </tr>";
+			        echo " <tr><td><b>Address:</b></td> <td><a href='#' id='address' data-type:'text' data-pk='$id' data-url='updateDoctor.php' data-title='Update'>$address</td> </tr>";
 				
 
 

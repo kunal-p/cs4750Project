@@ -40,7 +40,7 @@ if(isset($_SESSION['id'])){
 
         <script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src="js/javascript.js"></script>
-        <script type="text/javascript">
+	<script type="text/javascript">
 
         $("document").ready(function(){
 			$('#submitButton').onclick = function() { doSubmit(); };
@@ -53,7 +53,7 @@ if(isset($_SESSION['id'])){
 		    }); // end ajax call
     	});
 
-        var id = <?php echo $id;?>;
+        var id = '<?php echo $id;?>';
         var events;
         </script>
         <script type="text/javascript">
