@@ -17,22 +17,22 @@
 		echo "STOP TRYING TO DO BAD STUFF <br>";
 		exit("Script exiting");
 	}
-	echo "This line is the password being hashed: ";
-	echo $password;
-	echo "<br>";
-	echo "This line is the hashed input password: ";
-	echo hash('sha256', $password);
+	//echo "This line is the password being hashed: ";
+	//echo $password;
+	//echo "<br>";
+	//echo "This line is the hashed input password: ";
+	//echo hash('sha256', $password);
 	$stmt = $db_connection->stmt_init();
 	if($stmt->prepare("select username, password, id, type from users")) {
 	    $stmt->execute();
 		$stmt->bind_result($username2, $password2, $id, $type);
 		while($stmt->fetch()) {
-				echo "<br>";
-				echo $password2;
-				echo "<br>";
+				//echo "<br>";
+				//echo $password2;
+				//echo "<br>";
 			if ($username == $username2 && hash('sha256', $password) === $password2) {
-				echo hash('sha256', $password);
-				echo $password2;
+				//echo hash('sha256', $password);
+				//echo $password2;
 				$bool = 1;
 				$_SESSION['username'] = $username;
 				$_SESSION['id'] = $id;
@@ -42,8 +42,8 @@
 		}
 	}
 	if ($bool == 0) {
-		echo $username;
-		echo $password;
+		//echo $username;
+		//echo $password;
 		echo "INCORRECT USER OR PASSWORD";
 	}
 ?>
