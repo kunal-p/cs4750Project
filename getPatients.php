@@ -6,7 +6,7 @@ $db_connection = new mysqli($SERVER, $USERNAME, $PASSWORD, $DATABASE);
     return null;
   }
   $id = $_POST['id'];
-  $patients = [];
+  $patients = array();
   $stmt = $db_connection->stmt_init();
   $return_arr = array();
   if($stmt->prepare("SELECT DISTINCT patient_id FROM patient natural join appointments WHERE license_id='$id'") or die("<br/>Error Building Query!<br/>" . mysqli_error($db_connection))) {
