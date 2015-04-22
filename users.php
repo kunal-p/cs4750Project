@@ -1,5 +1,8 @@
 <?php
-session_start();//starting session
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 $type = 0;////TODO delete 
 if(isset($_SESSION['type'])){
 	$type = $_SESSION['type'];
